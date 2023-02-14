@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import List from "./List";
 import Alert from "./Alert";
+
+// allows you to save list to the browser window
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
   if (list) {
