@@ -1,29 +1,20 @@
-/*
-=============== 
-Variables
-===============
-*/
-
 :root {
-  /* dark shades of primary color*/
   --clr-primary-1: hsl(205, 86%, 17%);
   --clr-primary-2: hsl(205, 77%, 27%);
   --clr-primary-3: hsl(205, 72%, 37%);
   --clr-primary-4: hsl(205, 63%, 48%);
-  /* primary/main color */
+
   --clr-primary-5: hsl(205, 78%, 60%);
-  /* lighter shades of primary color */
+
   --clr-primary-6: hsl(205, 89%, 70%);
   --clr-primary-7: hsl(205, 90%, 76%);
   --clr-primary-8: hsl(205, 86%, 81%);
   --clr-primary-9: hsl(205, 90%, 88%);
   --clr-primary-10: hsl(205, 100%, 96%);
-  /* darkest grey - used for headings */
   --clr-grey-1: hsl(209, 61%, 16%);
   --clr-grey-2: hsl(211, 39%, 23%);
   --clr-grey-3: hsl(209, 34%, 30%);
   --clr-grey-4: hsl(209, 28%, 39%);
-  /* grey used for paragraphs */
   --clr-grey-5: hsl(210, 22%, 49%);
   --clr-grey-6: hsl(209, 23%, 60%);
   --clr-grey-7: hsl(211, 27%, 70%);
@@ -43,12 +34,21 @@ Variables
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
   --fixed-width: 620px;
+  --clr-bcg: #fff;
+  --clr-font: #282c35;
+  --clr-primary: #d23669;
 }
-/*
-=============== 
-Global Styles
-===============
-*/
+
+.dark-theme {
+  --clr-bcg: #282c35;
+  --clr-font: #fff;
+  --clr-primary: #ffa7c4;
+}
+.light-theme {
+  --clr-bcg: rgb(236, 232, 232);
+  --clr-font: #252830;
+  --clr-primary: #d23669;
+}
 
 *,
 ::after,
@@ -58,20 +58,10 @@ Global Styles
   box-sizing: border-box;
 }
 body {
-  background-image: linear-gradient(
-    to right top,
-    #051937,
-    #2a3e61,
-    #4e678e,
-    #7394bd,
-    #9bc3ee
-  );
+  background: var(--clr-bcg);
   height: 100vh;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   font-family: "Kanit", sans-serif;
-  color: var(--clr-grey-1);
+  color: var(--clr-font);
   line-height: 1.5;
   font-size: 0.875rem;
 }
@@ -152,7 +142,7 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-  color: whitesmoke;
+  color: var(--clr-font);
 }
 /* section */
 .section {
@@ -175,11 +165,9 @@ main {
   display: grid;
   place-items: center;
 }
-/*
-=============== 
-Grocery List
-===============
-*/
+
+/* GROCERY LIST */
+
 .section-center {
   background: var(--clr-white);
   border-radius: var(--radius);
@@ -234,7 +222,6 @@ Grocery List
 }
 .submit-btn {
   background: var(--clr-primary-8);
-  /* border-color: transparent; */
   border: 1px solid black;
   margin-left: 0.5rem;
   flex: 0 0 5rem;
@@ -320,4 +307,83 @@ Grocery List
 }
 .clear-btn:hover {
   color: var(--clr-red-dark);
+}
+
+.toggle-btn {
+  display: flex;
+  margin: 1.2rem;
+  padding: 0.3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--dark-shadow);
+  transition: var(--transition);
+}
+
+.toggle-btn-div {
+  display: flex;
+  justify-content: right;
+  margin: 1.2rem;
+}
+
+.toggle-btn:hover {
+  background-color: var(--clr-grey-6);
+}
+
+/* THEME BUTTON/SLIDER */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--clr-primary-6);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

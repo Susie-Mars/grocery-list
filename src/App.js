@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import List from "./List";
 import Alert from "./Alert";
 
+const getStorageTheme = () => {
+  let theme = "light-theme";
+  if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
+  }
+  return theme;
+};
 // allows you to save list to the browser window
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
@@ -12,6 +19,8 @@ const getLocalStorage = () => {
   }
 };
 function App() {
+  const [theme, setTheme] = useState(getStorageTheme());
+
   const [name, setName] = useState("");
   const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
@@ -43,6 +52,14 @@ function App() {
     }
   };
 
+  const toggleTheme = () => {
+    if (theme === "light-theme") {
+      setTheme("dark-theme");
+    } else {
+      setTheme("light-theme");
+    }
+  };
+
   const showAlert = (show = false, type = "", msg = "") => {
     setAlert({ show, type, msg });
   };
@@ -62,9 +79,19 @@ function App() {
   };
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
-  }, [list]);
+    document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [list, theme]);
+
   return (
     <>
+      <div class="toggle-btn-div">
+        <label class="switch">
+          <input type="checkbox" onClick={toggleTheme}></input>
+          <span class="slider round"></span>
+        </label>
+      </div>
+
       <h2 className="title-main">Grocery List</h2>
       <section className="section-center">
         <form className="grocery-form" onSubmit={handleSubmit}>
