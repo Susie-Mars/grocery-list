@@ -1,5 +1,6 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { TiDeleteOutline } from "react-icons/ti";
+import { RiEditLine } from "react-icons/ri";
 const List = ({ items, removeItem, editItem }) => {
   return (
     <div className="grocery-list">
@@ -14,14 +15,14 @@ const List = ({ items, removeItem, editItem }) => {
                 className="edit-btn"
                 onClick={() => editItem(id)}
               >
-                <FaEdit size={18} />
+                <RiEditLine size={20} />
               </button>
               <button
                 type="button"
                 className="delete-btn"
                 onClick={() => removeItem(id)}
               >
-                <FaTrash size={18} />
+                <TiDeleteOutline size={20} />
               </button>
             </div>
           </article>
